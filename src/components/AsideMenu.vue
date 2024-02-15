@@ -29,6 +29,10 @@ import AsideMenuItem from './AsideMenuItem.vue';
 </template>
 
 <style lang="scss">
+.aside {
+  width: 190px;
+}
+
 .container {
   padding: 0 10px 0 10px;
 

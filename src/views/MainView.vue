@@ -4,9 +4,9 @@ import AsideMenu from '@/components/AsideMenu.vue';
 
 <template>
   <AsideMenu />
-  <main class="main">
+  <div class="main-content">
     <div class="container">
-      <div class="header main__header">
+      <div class="header main-content__header">
         <div class="header__title">
           <div class="header__title_top">
             <unicon
@@ -23,11 +23,13 @@ import AsideMenu from '@/components/AsideMenu.vue';
 
       <RouterView />
     </div>
-  </main>
+  </div>
 </template>
 
 <style scoped lang="scss">
-.main {
+.main-content {
+  width: 100%;
+  height: 100%;
   .container {
     padding: 0 18px;
   }

@@ -11,6 +11,9 @@
   font-family: 'Roboto-Regular';
   font-weight: 400;
   font-size: 18px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
   a {
     color: #000;
   }
