@@ -5,7 +5,7 @@ import AsideMenuItem from './AsideMenuItem.vue';
 <template>
   <aside class="aside">
     <div class="container">
-      <h3 class="title">All brands</h3>
+      <span class="title">All brands</span>
       <hr />
 
       <ul class="items">
@@ -34,8 +34,7 @@ import AsideMenuItem from './AsideMenuItem.vue';
 
   .title {
     font-family: 'Roboto-Light';
-    font-size: 24px;
-    text-transform: uppercase;
+    font-size: 20px;
   }
   .items {
     &__container {

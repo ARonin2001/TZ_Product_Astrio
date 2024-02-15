@@ -7,11 +7,11 @@ import Header from './components/Header.vue';
     <div class="container">
       <Header />
 
-      <div class="main-content">
-        <div class="main-content__container">
+      <main class="main">
+        <div class="main__container">
           <RouterView />
         </div>
-      </div>
+      </main>
     </div>
   </div>
 </template>
@@ -35,7 +35,7 @@ import Header from './components/Header.vue';
   }
 }
 
-.main-content {
+.main {
   &__container {
     display: flex;
     padding: 40px 0 0 0;
