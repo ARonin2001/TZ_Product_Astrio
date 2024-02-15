@@ -4,9 +4,9 @@ import { createApp } from 'vue';
 import App from './App.vue';
 import router from './router';
 import Unicon from 'vue-unicons';
-import { uniShoppingBasket } from 'vue-unicons/dist/icons';
+import { uniShoppingBasket, uniShoppingCart } from 'vue-unicons/dist/icons';
 
-Unicon.add([uniShoppingBasket]);
+Unicon.add([uniShoppingBasket, uniShoppingCart]);
 
 const app = createApp(App);
 
