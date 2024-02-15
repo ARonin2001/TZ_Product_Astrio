@@ -8,30 +8,32 @@
     <unicon
       name="shopping-basket"
       class="basket__icon"
-      height="30px"
-      width="30px"
+      height="36px"
+      width="36px"
     />
   </div>
 </template>
 
 <style scoped lang="scss">
 .basket {
+  position: relative;
   cursor: pointer;
 
   &__count-products {
     position: absolute;
-    right: 10px;
-    top: 5px;
+    right: 0;
+    bottom: 0;
 
     span {
       display: inline-block;
-      min-height: 22px;
-      min-width: 22px;
-      background: #242424;
+      min-height: 21px;
+      min-width: 21px;
+      line-height: 21px;
+      background: #ff3131;
       color: #fff;
       font-family: 'Roboto-Regular';
       text-align: center;
-      padding: 5px;
+      padding: 0 4px;
       border-radius: 50%;
     }
   }
