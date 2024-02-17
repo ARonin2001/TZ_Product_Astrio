@@ -4,13 +4,13 @@
   <div class="product">
     <div class="container">
       <div class="product__img">
-        <img src="@/assets/images/1.png" alt="brend" />
+        <img src="@/assets/images/3.png" alt="brend" />
       </div>
       <span class="title">Product</span>
       <span class="brend">Brend</span>
       <hr />
       <div class="product__footer">
-        <div class="price">55 $</div>
+        <div class="price">55 <span class="price-usd">$</span></div>
         <button class="btn__by">BY</button>
       </div>
     </div>
@@ -20,7 +20,8 @@
 <style scoped lang="scss">
 .product {
   position: relative;
-  width: 280px;
+  max-width: 280px;
+  width: 100%;
   max-height: 400px;
   overflow: hidden;
   cursor: pointer;
@@ -63,7 +64,6 @@
     font-size: 20px;
     color: #000;
     overflow: hidden;
-    // white-space: nowrap;
     text-overflow: ellipsis;
   }
   .brend {
@@ -81,12 +81,13 @@
 
     .price {
       font-family: 'Roboto-Bold';
-      font-size: 20px;
+      font-size: 18px;
     }
     .btn__by {
       border-radius: 5px;
       padding: 5px 42px;
-      width: 143px;
+      max-width: 143px;
+      width: 100%;
       height: 40px;
       font-family: 'Roboto-Medium';
       font-size: 20px;
