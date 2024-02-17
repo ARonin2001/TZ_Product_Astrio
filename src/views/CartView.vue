@@ -2,12 +2,35 @@
   <div class="cart">
     <div class="container">
       <HTitle title="Shopping Cart" />
+
+      <div class="cart-content">
+        <div class="cart-content__container">
+          <CartHeader class="cart__header" />
+
+          <div class="cart-products">
+            <div class="cart-products__container">
+              <ProductItem />
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
 import HTitle from '@/components/HTitle.vue';
+import CartHeader from '@/components/Cart/CartHeader.vue';
+import ProductItem from '@/components/Cart/ProductItem.vue';
 </script>
 
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+.cart {
+  width: 100%;
+  height: 100%;
+
+  &__header {
+    margin: 40px 0 30px 0;
+  }
+}
+</style>

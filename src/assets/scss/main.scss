@@ -6,3 +6,17 @@ body {
   overflow-y: scroll;
   overflow-x: hidden;
 }
+
+.__title {
+  font-family: 'Roboto-Medium';
+  font-weight: 500;
+  font-size: 20px;
+  color: #000;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.__sub-title {
+  font-family: 'Roboto-Regular';
+  font-size: 18px;
+  color: #a4acad;
+}
