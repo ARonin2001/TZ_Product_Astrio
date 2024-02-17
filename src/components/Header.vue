@@ -1,10 +1,18 @@
-<script setup lang="ts">
-import Basket from './Basket.vue';
-</script>
-
 <template>
   <header class="header">
     <div class="container">
+      <div
+        class="header__burger-menu burger-menu"
+        :class="{ 'burger-menu_active': menuIsActive }"
+        @click="toggleDisplayAside"
+      >
+        <div class="burger-menu__container">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </div>
+
       <div class="logo">
         <RouterLink :to="{ name: 'main' }">
           <img
@@ -22,6 +30,22 @@ import Basket from './Basket.vue';
   </header>
 </template>
 
+<script setup lang="ts">
+import { ref } from 'vue';
+import Basket from './Basket.vue';
+
+const aside = document.getElementById('aside-menu-left');
+const menuIsActive = ref(false);
+
+const toggleDisplayAside = () => {
+  if (aside) {
+    aside.classList.toggle('aside__display_active');
+  }
+
+  menuIsActive.value = !menuIsActive.value;
+};
+</script>
+
 <style scoped lang="scss">
 .header {
   background: #f2f2f2;
@@ -29,11 +53,47 @@ import Basket from './Basket.vue';
 .container {
   display: flex;
   justify-content: space-between;
-  align-items: flex-end;
+  align-items: center;
   padding: 18px;
 
   .logo {
     margin: 0 auto;
+  }
+
+  .burger-menu {
+    display: none;
+
+    @media (min-width: 320px) and (max-width: 768px) {
+      display: block;
+    }
+
+    cursor: pointer;
+    &__container {
+      span {
+        display: block;
+        width: 24px;
+        height: 2px;
+        background-color: #000;
+        &:nth-child(2) {
+          margin: 3px 0;
+        }
+        transition: all 0.3s;
+      }
+    }
+
+    &_active {
+      span {
+        &:first-child {
+          transform: rotate(45deg) translate(3px, 4px);
+        }
+        &:nth-child(2) {
+          transform: rotate(-45deg);
+        }
+        &:last-child {
+          opacity: 0;
+        }
+      }
+    }
   }
 }
 </style>

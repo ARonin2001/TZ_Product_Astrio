@@ -36,6 +36,8 @@ import Header from './components/Header.vue';
 }
 
 .main {
+  position: relative;
+
   &__container {
     display: flex;
     padding: 40px 0 40px 0;
