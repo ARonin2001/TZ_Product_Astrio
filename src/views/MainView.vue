@@ -1,5 +1,5 @@
 <template>
-  <AsideMenu class="aside__display" />
+  <AsideMenu />
   <div class="main-content">
     <div class="container">
       <HTitle title="Products" subTitle="Brands" class="main-content__header" />
@@ -15,19 +15,6 @@ import HTitle from '@/components/HTitle.vue';
 </script>
 
 <style scoped lang="scss">
-.aside__display {
-  @media (min-width: 320px) and (max-width: 768px) {
-    position: absolute;
-    top: 40px;
-    left: -100%;
-    transition: all 0.3s;
-  }
-
-  &_active {
-    left: 0 !important;
-  }
-}
-
 .main-content {
   width: 100%;
   height: 100%;

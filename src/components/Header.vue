@@ -3,7 +3,10 @@
     <div class="container">
       <div
         class="header__burger-menu burger-menu"
-        :class="{ 'burger-menu_active': menuIsActive }"
+        :class="{
+          'burger-menu_active': menuIsActive,
+          block_hidden: activeOnlyLogo
+        }"
         @click="toggleDisplayAside"
       >
         <div class="burger-menu__container">
@@ -14,7 +17,7 @@
       </div>
 
       <div class="logo">
-        <RouterLink :to="{ name: 'main' }">
+        <RouterLink :to="{ name: 'products' }">
           <img
             src="@/assets/images/logo.png"
             alt="Astrio logo"
@@ -23,7 +26,10 @@
         </RouterLink>
       </div>
 
-      <RouterLink :to="{}">
+      <RouterLink
+        :to="{ name: 'cart' }"
+        :class="{ block_hidden: activeOnlyLogo }"
+      >
         <Basket />
       </RouterLink>
     </div>
@@ -31,25 +37,47 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ref, watch, watchEffect } from 'vue';
 import Basket from './Basket.vue';
+import { useRoute } from 'vue-router';
 
-const aside = document.getElementById('aside-menu-left');
 const menuIsActive = ref(false);
+const activeOnlyLogo = ref(false);
+const route = useRoute();
 
 const toggleDisplayAside = () => {
+  const aside = document.getElementById('aside-menu-left');
+
   if (aside) {
-    aside.classList.toggle('aside__display_active');
+    aside.classList.toggle('aside_active');
   }
 
   menuIsActive.value = !menuIsActive.value;
 };
+
+watch(
+  () => route.fullPath,
+  () => {
+    if (route.fullPath.includes('/cart')) {
+      activeOnlyLogo.value = true;
+      menuIsActive.value = false;
+    } else {
+      activeOnlyLogo.value = false;
+    }
+  }
+);
 </script>
 
 <style scoped lang="scss">
 .header {
   background: #f2f2f2;
+  height: 75px;
+
+  .block_hidden {
+    display: none !important;
+  }
 }
+
 .container {
   display: flex;
   justify-content: space-between;

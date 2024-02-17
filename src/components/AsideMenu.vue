@@ -43,9 +43,25 @@ const handleClickItem = (itemId: number) => {
 .aside {
   min-width: 150px;
   max-width: 190px;
+  width: 100%;
   background-color: #fff;
   height: 100%;
   z-index: 100;
+
+  @media (min-width: 320px) and (max-width: 768px) {
+    position: absolute;
+    top: 40px;
+    left: -200%;
+    transition: all 0.3s;
+  }
+
+  &_active {
+    left: 0 !important;
+  }
+
+  @media (max-width: 425px) {
+    max-width: 100%;
+  }
 }
 
 .container {
