@@ -1,24 +1,18 @@
-<script setup lang="ts">
-import AsideMenuItem from './AsideMenuItem.vue';
-</script>
-
 <template>
-  <aside class="aside">
+  <aside class="aside" id="aside-menu-left">
     <div class="container">
       <span class="title">All brands</span>
       <hr />
 
       <ul class="items">
         <div class="items__container">
-          <li class="items__link items__link_active">
-            <AsideMenuItem />
-            <span class="line"></span>
-          </li>
-          <li class="items__link">
-            <AsideMenuItem />
-            <span class="line"></span>
-          </li>
-          <li class="items__link">
+          <li
+            v-for="item in arr"
+            :key="item.id"
+            class="items__link"
+            :class="{ items__link_active: item.id === itemTarget }"
+            @click="handleClickItem(item.id)"
+          >
             <AsideMenuItem />
             <span class="line"></span>
           </li>
@@ -28,9 +22,30 @@ import AsideMenuItem from './AsideMenuItem.vue';
   </aside>
 </template>
 
+<script setup lang="ts">
+import { ref } from 'vue';
+import AsideMenuItem from './AsideMenuItem.vue';
+
+const itemTarget = ref(1);
+
+const arr = [
+  { id: 1, title: 'dsf' },
+  { id: 2, title: 'two' },
+  { id: 3, title: 'three' }
+];
+
+const handleClickItem = (itemId: number) => {
+  itemTarget.value = itemId;
+};
+</script>
+
 <style lang="scss">
 .aside {
-  width: 190px;
+  min-width: 150px;
+  max-width: 190px;
+  background-color: #fff;
+  height: 100%;
+  z-index: 100;
 }
 
 .container {

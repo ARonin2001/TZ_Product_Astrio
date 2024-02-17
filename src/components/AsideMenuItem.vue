@@ -1,9 +1,9 @@
 <script setup lang="ts"></script>
 
 <template>
-  <div class="item">
+  <span class="item">
     <RouterLink :to="{}">Brend 1</RouterLink>
-  </div>
+  </span>
 </template>
 
 <style scoped lang="scss">
@@ -15,6 +15,9 @@
   white-space: nowrap;
   text-overflow: ellipsis;
   a {
+    display: inline-block;
+    height: 100%;
+    width: 100%;
     color: #000;
   }
 }
