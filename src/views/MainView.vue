@@ -1,32 +1,33 @@
-<script setup lang="ts">
-import AsideMenu from '@/components/AsideMenu.vue';
-</script>
-
 <template>
-  <AsideMenu />
+  <AsideMenu class="aside__display" />
   <div class="main-content">
     <div class="container">
-      <div class="header main-content__header">
-        <div class="header__title">
-          <div class="header__title_top">
-            <unicon
-              name="shopping-cart"
-              class="title__icon"
-              height="18px"
-              width="18px"
-            />
-            <h1 class="title">Products</h1>
-          </div>
-          <span class="sub-title">guchi</span>
-        </div>
-      </div>
+      <HTitle title="Products" subTitle="Brands" class="main-content__header" />
 
       <RouterView />
     </div>
   </div>
 </template>
 
+<script setup lang="ts">
+import AsideMenu from '@/components/AsideMenu.vue';
+import HTitle from '@/components/HTitle.vue';
+</script>
+
 <style scoped lang="scss">
+.aside__display {
+  @media (min-width: 320px) and (max-width: 768px) {
+    position: absolute;
+    top: 40px;
+    left: -100%;
+    transition: all 0.3s;
+  }
+
+  &_active {
+    left: 0 !important;
+  }
+}
+
 .main-content {
   width: 100%;
   height: 100%;
@@ -35,27 +36,6 @@ import AsideMenu from '@/components/AsideMenu.vue';
   }
   &__header {
     margin-bottom: 30px;
-  }
-  .header {
-    &__title {
-      &_top {
-        display: flex;
-        align-items: flex-end;
-
-        .title {
-          font-size: 28px;
-          font-family: 'Roboto-Medium';
-          text-transform: uppercase;
-        }
-      }
-      .sub-title {
-        display: inline-block;
-        font-family: 'Roboto-Light';
-        color: #a4acad;
-        margin-top: 4px;
-        font-size: 16px;
-      }
-    }
   }
 }
 </style>
