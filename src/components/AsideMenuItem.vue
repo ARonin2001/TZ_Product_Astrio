@@ -1,10 +1,12 @@
-<script setup lang="ts"></script>
-
 <template>
   <span class="item">
-    <RouterLink :to="{}">Brend 1</RouterLink>
+    <RouterLink :to="{}">{{ title }}</RouterLink>
   </span>
 </template>
+
+<script setup lang="ts">
+const props = defineProps<{ title: string }>();
+</script>
 
 <style scoped lang="scss">
 .item {

@@ -7,13 +7,13 @@
       <ul class="items">
         <div class="items__container">
           <li
-            v-for="item in arr"
+            v-for="item in brandsStore.brands"
             :key="item.id"
             class="items__link"
-            :class="{ items__link_active: item.id === itemTarget }"
+            :class="{ items__link_active: item.id === currentItemId }"
             @click="handleClickItem(item.id)"
           >
-            <AsideMenuItem />
+            <AsideMenuItem :title="item.title" />
             <span class="line"></span>
           </li>
         </div>
@@ -23,19 +23,20 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
+import { onMounted, ref } from 'vue';
 import AsideMenuItem from './AsideMenuItem.vue';
+import { useBrandsStore } from '@/store/brandStore';
 
-const itemTarget = ref(1);
+const brandsStore = useBrandsStore();
 
-const arr = [
-  { id: 1, title: 'dsf' },
-  { id: 2, title: 'two' },
-  { id: 3, title: 'three' }
-];
+onMounted(() => {
+  brandsStore.setAllBrands();
+});
+
+const currentItemId = ref(1);
 
 const handleClickItem = (itemId: number) => {
-  itemTarget.value = itemId;
+  currentItemId.value = itemId;
 };
 </script>
 
