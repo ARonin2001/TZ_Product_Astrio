@@ -14,6 +14,10 @@
               <ProductItem />
             </div>
           </div>
+
+          <div class="cart__sub-total">
+            <SubTotal />
+          </div>
         </div>
       </div>
     </div>
@@ -24,6 +28,8 @@
 import HTitle from '@/components/HTitle.vue';
 import CartHeader from '@/components/Cart/CartHeader.vue';
 import ProductItem from '@/components/Cart/ProductItem.vue';
+
+import SubTotal from '@/components/Cart/SubTotal.vue';
 </script>
 
 <style scoped lang="scss">
@@ -42,6 +48,11 @@ import ProductItem from '@/components/Cart/ProductItem.vue';
     display: grid;
     grid-template-rows: repeat(auto-fill, 1fr);
     row-gap: 20px;
+  }
+  &__sub-total {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 30px;
   }
 }
 </style>

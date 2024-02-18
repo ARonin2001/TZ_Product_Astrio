@@ -21,7 +21,7 @@ import ProductInfo from './ProductInfo.vue';
   .container {
     display: flex;
     justify-content: space-between;
-    padding: 0 10px;
+    padding: 5px 10px;
     align-items: center;
     @media (max-width: 425px) {
       flex-direction: column;
