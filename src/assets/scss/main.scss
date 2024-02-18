@@ -19,4 +19,6 @@ body {
   font-family: 'Roboto-Regular';
   font-size: 18px;
   color: #a4acad;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }

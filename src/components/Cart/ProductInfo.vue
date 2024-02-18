@@ -39,20 +39,31 @@ const totalCount = computed<number>(
 <style scoped lang="scss">
 .p-info {
   align-self: center;
+  max-width: 324px;
+  width: 100%;
 
   .container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    align-items: baseline;
+    gap: 15px 30px;
+    max-width: 324px;
+    width: 100%;
   }
   &__item {
-    height: 100%;
     position: relative;
-    &:not(:last-child) {
-      margin-right: 30px;
+    height: 100%;
+
+    &:first-child {
+      text-align: left;
+    }
+    &:last-child {
+      text-align: right;
     }
   }
   &__qty {
+    display: flex;
+    align-items: center;
     .p-info__title {
       margin: 0 10px;
     }
@@ -73,7 +84,12 @@ const totalCount = computed<number>(
   .p-info {
     padding: 15px 0;
     .container {
-      flex-direction: column;
+      grid-template-rows: repeat(auto-fill, 1fr);
+      grid-template-columns: none;
+      justify-content: center;
+    }
+    &__item {
+      text-align: center !important;
     }
   }
 }

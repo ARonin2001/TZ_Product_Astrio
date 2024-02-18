@@ -10,7 +10,7 @@
         /> -->
         <h1 class="title">{{ title }}</h1>
       </div>
-      <span class="sub-title">{{ subTitle }}</span>
+      <span class="sub-title __sub-title">{{ subTitle }}</span>
     </div>
   </div>
 </template>
@@ -32,13 +32,10 @@ const props = defineProps<{ title: string; subTitle?: string }>();
         text-transform: uppercase;
       }
     }
-    .sub-title {
-      display: inline-block;
-      font-family: 'Roboto-Light';
-      color: #a4acad;
-      margin-top: 4px;
-      font-size: 16px;
-    }
+  }
+  .sub-title {
+    display: inline-block;
+    margin-top: 10px;
   }
 }
 </style>

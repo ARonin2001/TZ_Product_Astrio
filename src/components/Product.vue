@@ -6,8 +6,8 @@
       <div class="product__img">
         <img src="@/assets/images/3.png" alt="brend" />
       </div>
-      <span class="title">Product</span>
-      <span class="brend">Brend</span>
+      <span class="title __title">Product</span>
+      <span class="sub-title __sub-title">Brend</span>
       <hr />
       <div class="product__footer">
         <div class="price">55 <span class="price-usd">$</span></div>
@@ -58,18 +58,7 @@
     }
   }
 
-  .title {
-    font-family: 'Roboto-Medium';
-    font-weight: 500;
-    font-size: 20px;
-    color: #000;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-  .brend {
-    font-family: 'Roboto-Regular';
-    font-size: 18px;
-    color: #a4acad;
+  .sub-title {
     margin-top: 15px;
   }
 

@@ -39,7 +39,7 @@ const handleClickItem = (itemId: number) => {
 };
 </script>
 
-<style lang="scss">
+<style scoped lang="scss">
 .aside {
   min-width: 150px;
   max-width: 190px;

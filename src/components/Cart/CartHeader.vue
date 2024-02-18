@@ -3,14 +3,14 @@
     <div class="cart-header__container">
       <div class="cart-header__title">
         <div class="title__container">
-          <span class="title">Item</span>
+          <span class="title __title">Item</span>
         </div>
       </div>
       <div class="cart-header__title">
         <div class="title__container">
-          <span class="title">Price</span>
-          <span class="title">Qty</span>
-          <span class="title">Total</span>
+          <span class="title __title">Price</span>
+          <span class="title __title">Qty</span>
+          <span class="title __title">Total</span>
         </div>
       </div>
     </div>
@@ -27,16 +27,17 @@
   &__container {
     display: flex;
     justify-content: space-between;
+    padding: 0 10px;
   }
 
   &__title {
     .title__container {
       display: flex;
       justify-content: space-between;
-
-      .title {
-        font-weight: bold;
-      }
+    }
+    &:last-child {
+      max-width: 324px;
+      width: 100%;
     }
   }
 }

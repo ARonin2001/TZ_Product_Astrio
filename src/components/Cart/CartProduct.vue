@@ -21,12 +21,14 @@
 
     @media (max-width: 425px) {
       flex-direction: column;
+      align-items: center;
     }
   }
 
   &__img {
     margin-right: 30px;
     border: 1px solid #f2f2f2;
+    margin: 0 auto;
     img {
       width: 150px;
       height: 100%;
@@ -37,6 +39,11 @@
   .description {
     display: flex;
     flex-direction: column;
+    max-width: 224px;
+
+    @media (max-width: 425px) {
+      align-items: center;
+    }
   }
   &__title {
     margin-bottom: 15px;

@@ -10,6 +10,8 @@
           <div class="cart-products">
             <div class="cart-products__container">
               <ProductItem />
+              <ProductItem />
+              <ProductItem />
             </div>
           </div>
         </div>
@@ -31,6 +33,15 @@ import ProductItem from '@/components/Cart/ProductItem.vue';
 
   &__header {
     margin: 40px 0 30px 0;
+
+    @media (max-width: 425px) {
+      display: none;
+    }
+  }
+  &-products__container {
+    display: grid;
+    grid-template-rows: repeat(auto-fill, 1fr);
+    row-gap: 20px;
   }
 }
 </style>
