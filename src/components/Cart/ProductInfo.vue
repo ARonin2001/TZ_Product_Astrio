@@ -11,25 +11,39 @@
         <span class="p-info__title __title">{{ count }}</span>
         <button class="p-info__btn" @click="incTotalCount">+</button>
       </div>
-      <div class="p-info__item">
+      <div class="p-info__item p-info__total-count">
         <span class="p-info__title __title">{{ totalCount }}</span>
+      </div>
+      <div class="p-info__item p-info__delete">
+        <BtnDelete />
       </div>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { computed, ref } from 'vue';
+import { computed, onMounted, ref } from 'vue';
+import BtnDelete from './BtnDelete.vue';
+
+const emits = defineEmits(['handleChangePrice']);
 
 const price = 88.8;
 const count = ref(1);
 
 const incTotalCount = () => {
   count.value++;
+  emits('handleChangePrice', price);
 };
 const decTotalCount = () => {
-  if (count.value != 1) count.value--;
+  if (count.value != 1) {
+    count.value--;
+    emits('handleChangePrice', -price);
+  }
 };
+
+onMounted(() => {
+  emits('handleChangePrice', price);
+});
 
 const totalCount = computed<number>(
   () => Math.round(price * count.value * 100) / 100
@@ -39,27 +53,17 @@ const totalCount = computed<number>(
 <style scoped lang="scss">
 .p-info {
   align-self: center;
-  max-width: 324px;
-  width: 100%;
 
   .container {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(3, 1fr) 20px;
     align-items: baseline;
     gap: 15px 30px;
-    max-width: 324px;
-    width: 100%;
   }
   &__item {
     position: relative;
     height: 100%;
-
-    &:first-child {
-      text-align: left;
-    }
-    &:last-child {
-      text-align: right;
-    }
+    text-align: center;
   }
   &__qty {
     display: flex;
@@ -77,6 +81,9 @@ const totalCount = computed<number>(
     text-align: center;
     border-radius: 50%;
     font-size: 20px;
+  }
+  &__delete {
+    align-self: end;
   }
 }
 

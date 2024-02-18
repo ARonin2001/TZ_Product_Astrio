@@ -4,7 +4,7 @@
       <!-- left: img, name product and brand -->
       <CartProduct />
       <!-- right: price, count, totalCount -->
-      <ProductInfo />
+      <ProductInfo @handleChangePrice="handleChangePrice" />
     </div>
   </div>
 </template>
@@ -12,6 +12,8 @@
 <script setup lang="ts">
 import CartProduct from './CartProduct.vue';
 import ProductInfo from './ProductInfo.vue';
+
+const props = defineProps<{ handleChangePrice: (count: number) => void }>();
 </script>
 
 <style scoped lang="scss">

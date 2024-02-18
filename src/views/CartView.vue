@@ -9,14 +9,14 @@
 
           <div class="cart-products">
             <div class="cart-products__container">
-              <ProductItem />
-              <ProductItem />
-              <ProductItem />
+              <ProductItem :handleChangePrice="calcSubTotalPrice" />
+              <ProductItem :handleChangePrice="calcSubTotalPrice" />
+              <ProductItem :handleChangePrice="calcSubTotalPrice" />
             </div>
           </div>
 
           <div class="cart__sub-total">
-            <SubTotal />
+            <SubTotal :total="subTotalPrice" />
           </div>
         </div>
       </div>
@@ -28,8 +28,14 @@
 import HTitle from '@/components/HTitle.vue';
 import CartHeader from '@/components/Cart/CartHeader.vue';
 import ProductItem from '@/components/Cart/ProductItem.vue';
-
 import SubTotal from '@/components/Cart/SubTotal.vue';
+import { ref } from 'vue';
+
+const subTotalPrice = ref(0);
+
+const calcSubTotalPrice = (totalCount: number) => {
+  subTotalPrice.value += Math.round(totalCount * 100) / 100;
+};
 </script>
 
 <style scoped lang="scss">
