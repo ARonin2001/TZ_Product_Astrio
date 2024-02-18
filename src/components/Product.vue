@@ -1,4 +1,6 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import BaseButton from './BaseButton.vue';
+</script>
 
 <template>
   <div class="product">
@@ -11,7 +13,8 @@
       <hr />
       <div class="product__footer">
         <div class="price">55 <span class="price-usd">$</span></div>
-        <button class="btn__by">BY</button>
+        <!-- <button class="btn__by">BY</button> -->
+        <BaseButton title="By" class="product__footer-btn" />
       </div>
     </div>
   </div>
@@ -72,23 +75,9 @@
       font-family: 'Roboto-Bold';
       font-size: 18px;
     }
-    .btn__by {
-      border-radius: 5px;
-      padding: 5px 42px;
+    &-btn {
       max-width: 143px;
-      width: 100%;
       height: 40px;
-      font-family: 'Roboto-Medium';
-      font-size: 20px;
-      text-align: center;
-      color: #f2f2f2;
-      background: #f46d40;
-      transition: all 0.3s;
-
-      &:active {
-        width: 138px;
-        height: 35px;
-      }
     }
   }
 }
