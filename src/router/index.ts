@@ -11,7 +11,7 @@ const router = createRouter({
       component: MainView,
       children: [
         {
-          path: '/products',
+          path: 'products/:brandId?',
           name: 'products',
           component: ProductsVue
         }
