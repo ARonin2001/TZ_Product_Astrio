@@ -1,24 +1,37 @@
-<script setup lang="ts">
-import BaseButton from './BaseButton.vue';
-</script>
-
 <template>
   <div class="product">
     <div class="container">
       <div class="product__img">
-        <img src="@/assets/images/3.png" alt="brend" />
+        <img :src="imagePath" alt="brend" />
       </div>
-      <span class="title __title">Product</span>
-      <span class="sub-title __sub-title">Brend</span>
+      <span class="title __title">{{ title }}</span>
+      <span class="sub-title __sub-title">{{ brand }}</span>
       <hr />
       <div class="product__footer">
-        <div class="price">55 <span class="price-usd">$</span></div>
+        <div class="price">
+          {{ price }}
+          <span class="price-currency">{{ currency }}</span>
+        </div>
         <!-- <button class="btn__by">BY</button> -->
         <BaseButton title="By" class="product__footer-btn" />
       </div>
     </div>
   </div>
 </template>
+
+<script setup lang="ts">
+import BaseButton from './BaseButton.vue';
+
+interface Props {
+  title: string;
+  price: number;
+  brand: string;
+  currency: string;
+  imagePath: string;
+}
+
+const props = defineProps<Props>();
+</script>
 
 <style scoped lang="scss">
 .product {
