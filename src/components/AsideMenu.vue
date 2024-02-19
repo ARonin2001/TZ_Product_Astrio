@@ -13,7 +13,11 @@
             :class="{ items__link_active: item.id === currentItemId }"
             @click="handleClickItem(item.id)"
           >
-            <AsideMenuItem :title="item.title" />
+            <AsideMenuItem
+              :title="item.title"
+              nameLink="products"
+              :params="{ brandId: item.id }"
+            />
             <span class="line"></span>
           </li>
         </div>
