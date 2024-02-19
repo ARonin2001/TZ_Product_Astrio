@@ -37,7 +37,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, watch, watchEffect } from 'vue';
+import { ref, watch } from 'vue';
 import Basket from './Basket.vue';
 import { useRoute } from 'vue-router';
 
@@ -56,9 +56,9 @@ const toggleDisplayAside = () => {
 };
 
 watch(
-  () => route.fullPath,
+  () => route.path,
   () => {
-    if (route.fullPath.includes('/cart')) {
+    if (route.path.includes('/cart')) {
       activeOnlyLogo.value = true;
       menuIsActive.value = false;
     } else {
