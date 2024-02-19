@@ -1,20 +1,20 @@
 import { defineStore } from 'pinia';
 import { type IBrand } from '@/models/IBrand';
-import { apiMethods } from '@/api/api';
+import { brandsApi } from '@/api/api';
 
-interface State {
+interface initialState {
   brands: IBrand[];
 }
 
 export const useBrandsStore = defineStore('brands', {
-  state: (): State => {
+  state: (): initialState => {
     return {
       brands: []
     };
   },
   actions: {
     async setAllBrands(): Promise<void> {
-      const result: IBrand[] = await apiMethods.getBrands();
+      const result: IBrand[] = await brandsApi.getBrands();
       this.brands = result;
     }
   }
