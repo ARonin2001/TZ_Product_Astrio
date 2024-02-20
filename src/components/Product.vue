@@ -2,7 +2,7 @@
   <div class="product">
     <div class="container">
       <div class="product__img">
-        <img :src="imagePath" alt="brend" />
+        <img :src="imagePath" :alt="brand" />
       </div>
       <span class="title __title">{{ title }}</span>
       <span class="sub-title __sub-title">{{ brand }}</span>
@@ -13,7 +13,11 @@
           <span class="price-currency">{{ currency }}</span>
         </div>
         <!-- <button class="btn__by">BY</button> -->
-        <BaseButton title="By" class="product__footer-btn" />
+        <BaseButton
+          @handleClick="onClick"
+          title="By"
+          class="product__footer-btn"
+        />
       </div>
     </div>
   </div>
@@ -23,6 +27,7 @@
 import BaseButton from './BaseButton.vue';
 
 interface Props {
+  id: number;
   title: string;
   price: number;
   brand: string;
@@ -31,6 +36,11 @@ interface Props {
 }
 
 const props = defineProps<Props>();
+
+const emits = defineEmits(['handleClick']);
+const onClick = () => {
+  emits('handleClick', props.id);
+};
 </script>
 
 <style scoped lang="scss">

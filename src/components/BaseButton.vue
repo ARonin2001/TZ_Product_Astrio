@@ -1,9 +1,14 @@
 <template>
-  <button class="base-btn">{{ title }}</button>
+  <button @click="onClick" class="base-btn">{{ title }}</button>
 </template>
 
 <script setup lang="ts">
 const props = defineProps<{ title: string }>();
+const emits = defineEmits(['handleClick']);
+
+const onClick = () => {
+  emits('handleClick');
+};
 </script>
 <style scoped lang="scss">
 .base-btn {
