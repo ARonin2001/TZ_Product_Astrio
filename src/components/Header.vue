@@ -30,7 +30,7 @@
         :to="{ name: 'cart' }"
         :class="{ block_hidden: activeOnlyLogo }"
       >
-        <Basket />
+        <Basket :count="getCountProductsInCart" />
       </RouterLink>
     </div>
   </header>
@@ -40,10 +40,16 @@
 import { ref, watch } from 'vue';
 import Basket from './Basket.vue';
 import { useRoute } from 'vue-router';
+import { useCartStore } from '@/store/cartStore';
+import { storeToRefs } from 'pinia';
 
 const menuIsActive = ref(false);
 const activeOnlyLogo = ref(false);
 const route = useRoute();
+
+const cartStore = useCartStore();
+const { getCountProductsInCart } = storeToRefs(cartStore);
+// const getCountProductsInCart = cartStore.getCountProductsInCart;
 
 const toggleDisplayAside = () => {
   const aside = document.getElementById('aside-menu-left');

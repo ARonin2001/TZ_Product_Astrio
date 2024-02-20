@@ -1,9 +1,7 @@
-<script setup lang="ts"></script>
-
 <template>
   <div class="basket">
     <div class="basket__count-products">
-      <span>5</span>
+      <span>{{ count }}</span>
     </div>
     <unicon
       name="shopping-basket"
@@ -13,6 +11,10 @@
     />
   </div>
 </template>
+
+<script setup lang="ts">
+const props = defineProps<{ count: number }>();
+</script>
 
 <style scoped lang="scss">
 .basket {
