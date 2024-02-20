@@ -27,6 +27,12 @@ export const useProductsStore = defineStore('products', {
       const result = await getChangedProductsByBrand(products, brandId);
       this.products = result;
     }
+  },
+  getters: {
+    getProductById: (state) => {
+      return (productId: number) =>
+        state.products.find((p) => p.id === productId);
+    }
   }
 });
 
