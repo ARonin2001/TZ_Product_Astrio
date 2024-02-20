@@ -9,14 +9,25 @@
 
           <div class="cart-products">
             <div class="cart-products__container">
-              <ProductItem :handleChangePrice="calcSubTotalPrice" />
-              <ProductItem :handleChangePrice="calcSubTotalPrice" />
-              <ProductItem :handleChangePrice="calcSubTotalPrice" />
+              <ProductItem
+                v-for="p in cartStore.getCart"
+                :key="p.id"
+                :id="p.id"
+                :title="p.product.title"
+                :subTitle="p.product.brand.toString()"
+                :img="p.product.image"
+                :handleChangePrice="cartStore.changeCountProduct"
+                :deleteProduct="cartStore.deleteCartProduct"
+                :price="p.product.regular_price.value"
+                :currency="Currency[p.product.regular_price.currency]"
+                :count="p.count"
+                :totalCount="p.totalPrice"
+              />
             </div>
           </div>
 
           <div class="cart__sub-total">
-            <SubTotal :total="subTotalPrice" />
+            <SubTotal :total="cartStore.subTotalPrice" />
           </div>
         </div>
       </div>
@@ -29,13 +40,10 @@ import HTitle from '@/components/HTitle.vue';
 import CartHeader from '@/components/Cart/CartHeader.vue';
 import ProductItem from '@/components/Cart/ProductItem.vue';
 import SubTotal from '@/components/Cart/SubTotal.vue';
-import { ref } from 'vue';
+import { useCartStore } from '@/store/cartStore';
+import { Currency } from '@/types/Currency';
 
-const subTotalPrice = ref(0);
-
-const calcSubTotalPrice = (totalCount: number) => {
-  subTotalPrice.value += Math.round(totalCount * 100) / 100;
-};
+const cartStore = useCartStore();
 </script>
 
 <style scoped lang="scss">
@@ -46,7 +54,7 @@ const calcSubTotalPrice = (totalCount: number) => {
   &__header {
     margin: 40px 0 30px 0;
 
-    @media (max-width: 425px) {
+    @media (max-width: 767px) {
       display: none;
     }
   }

@@ -2,24 +2,31 @@
   <div class="product">
     <div class="container">
       <div class="product__img">
-        <img class="product-img" src="@/assets/images/1.png" alt="product" />
+        <img class="product-img" :src="img" :alt="title" />
       </div>
       <div class="description">
-        <span class="__title product__title">Product 1</span>
-        <span class="__sub-title">Guchi</span>
+        <span class="__title product__title">{{ title }}</span>
+        <span class="__sub-title">{{ subTitle }}</span>
       </div>
     </div>
   </div>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+interface Props {
+  img: string;
+  title: string;
+  subTitle: string;
+}
+const props = defineProps<Props>();
+</script>
 
 <style scoped lang="scss">
 .product {
   .container {
     display: flex;
 
-    @media (max-width: 425px) {
+    @media (max-width: 767px) {
       flex-direction: column;
       align-items: center;
     }

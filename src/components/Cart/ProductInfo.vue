@@ -3,7 +3,8 @@
     <div class="container">
       <div class="p-info__item">
         <span class="p-info__title __title"
-          >{{ price }} <span class="p-info__currency">$</span></span
+          >{{ price }}
+          <span class="p-info__currency">{{ currency }}</span></span
         >
       </div>
       <div class="p-info__item p-info__qty">
@@ -15,39 +16,38 @@
         <span class="p-info__title __title">{{ totalCount }}</span>
       </div>
       <div class="p-info__item p-info__delete">
-        <BtnDelete />
+        <BtnDelete @handleClick="deleteProduct" />
       </div>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { computed, onMounted, ref } from 'vue';
 import BtnDelete from './BtnDelete.vue';
 
-const emits = defineEmits(['handleChangePrice']);
+interface Props {
+  id: string;
+  price: number;
+  currency: string;
+  count: number;
+  totalCount: number;
+}
 
-const price = 88.8;
-const count = ref(1);
+const props = defineProps<Props>();
+const emits = defineEmits(['handleChangePrice', 'deleteCart']);
 
 const incTotalCount = () => {
-  count.value++;
-  emits('handleChangePrice', price);
+  emits('handleChangePrice', props.id, props.count + 1);
 };
 const decTotalCount = () => {
-  if (count.value != 1) {
-    count.value--;
-    emits('handleChangePrice', -price);
+  if (props.count != 1) {
+    emits('handleChangePrice', props.id, props.count - 1);
   }
 };
 
-onMounted(() => {
-  emits('handleChangePrice', price);
-});
-
-const totalCount = computed<number>(
-  () => Math.round(price * count.value * 100) / 100
-);
+const deleteProduct = () => {
+  emits('deleteCart', props.id);
+};
 </script>
 
 <style scoped lang="scss">
@@ -87,7 +87,7 @@ const totalCount = computed<number>(
   }
 }
 
-@media (max-width: 425px) {
+@media (max-width: 767px) {
   .p-info {
     padding: 15px 0;
     .container {

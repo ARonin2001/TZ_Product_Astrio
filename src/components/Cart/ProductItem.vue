@@ -2,9 +2,17 @@
   <div class="product-item">
     <div class="container">
       <!-- left: img, name product and brand -->
-      <CartProduct />
+      <CartProduct :title="title" :subTitle="subTitle" :img="img" />
       <!-- right: price, count, totalCount -->
-      <ProductInfo @handleChangePrice="handleChangePrice" />
+      <ProductInfo
+        :id="id"
+        :price="price"
+        :currency="currency"
+        :count="count"
+        :totalCount="totalCount"
+        @handleChangePrice="handleChangePrice"
+        @deleteCart="deleteProduct"
+      />
     </div>
   </div>
 </template>
@@ -13,7 +21,20 @@
 import CartProduct from './CartProduct.vue';
 import ProductInfo from './ProductInfo.vue';
 
-const props = defineProps<{ handleChangePrice: (count: number) => void }>();
+interface Props {
+  id: string;
+  img: string;
+  title: string;
+  subTitle: string;
+  price: number;
+  currency: string;
+  count: number;
+  totalCount: number;
+  handleChangePrice: (cartId: string, count: number) => void;
+  deleteProduct: (cartId: string) => void;
+}
+
+const props = defineProps<Props>();
 </script>
 
 <style scoped lang="scss">
@@ -25,7 +46,7 @@ const props = defineProps<{ handleChangePrice: (count: number) => void }>();
     justify-content: space-between;
     padding: 5px 10px;
     align-items: center;
-    @media (max-width: 425px) {
+    @media (max-width: 767px) {
       flex-direction: column;
     }
   }

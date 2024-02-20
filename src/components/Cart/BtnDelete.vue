@@ -1,15 +1,20 @@
 <template>
-  <div class="btn_delete">
+  <button class="btn_delete" title="Delete product" @click="onClick">
     <unicon name="trash-alt" />
-  </div>
+  </button>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+const emits = defineEmits(['handleClick']);
+
+const onClick = () => {
+  emits('handleClick');
+};
+</script>
 <style scoped lang="scss">
 .btn {
   &_delete {
-    cursor: pointer;
-
+    background: transparent;
     .unicon {
       @media (hover: hover) {
         &:hover {

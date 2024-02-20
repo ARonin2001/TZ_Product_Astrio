@@ -4,7 +4,7 @@
       <div class="total-count __title">
         <span>Subtotal: </span>
         <span class="total-price"
-          >{{ total.toFixed(2) }}<span class="currency">$</span></span
+          >{{ total }}<span class="currency">$</span></span
         >
       </div>
       <div class="checkout">
