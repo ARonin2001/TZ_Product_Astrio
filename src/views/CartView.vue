@@ -5,7 +5,10 @@
 
       <div class="cart-content">
         <div class="cart-content__container">
-          <CartHeader class="cart__header" />
+          <CartHeader
+            class="cart__header"
+            v-if="cartStore.getCart.length > 0"
+          />
 
           <div class="cart-products">
             <div class="cart-products__container">
@@ -22,11 +25,13 @@
                 :currency="Currency[p.product.regular_price.currency]"
                 :count="p.count"
                 :totalCount="p.totalPrice"
+                :color="p.color"
+                :size="p.size"
               />
             </div>
           </div>
 
-          <div class="cart__sub-total">
+          <div class="cart__sub-total" v-if="cartStore.getCart.length > 0">
             <SubTotal :total="cartStore.subTotalPrice" />
           </div>
         </div>
@@ -58,6 +63,9 @@ const cartStore = useCartStore();
       display: none;
     }
   }
+  &-products {
+    position: relative;
+  }
   &-products__container {
     display: grid;
     grid-template-rows: repeat(auto-fill, 1fr);
@@ -67,6 +75,12 @@ const cartStore = useCartStore();
     display: flex;
     justify-content: flex-end;
     margin-top: 30px;
+
+    @media (max-width: 767px) {
+      position: sticky;
+      bottom: 20px;
+      z-index: 10;
+    }
   }
 }
 </style>

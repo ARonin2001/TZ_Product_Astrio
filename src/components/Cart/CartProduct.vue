@@ -7,6 +7,15 @@
       <div class="description">
         <span class="__title product__title">{{ title }}</span>
         <span class="__sub-title">{{ subTitle }}</span>
+
+        <div class="configurable" v-if="color && size">
+          <span class="conf __sub-title"
+            >color: <b>{{ color }}</b></span
+          >
+          <span class="conf __sub-title"
+            >size: <b>{{ size }}</b></span
+          >
+        </div>
       </div>
     </div>
   </div>
@@ -17,6 +26,8 @@ interface Props {
   img: string;
   title: string;
   subTitle: string;
+  color?: string;
+  size?: string;
 }
 const props = defineProps<Props>();
 </script>
@@ -43,13 +54,23 @@ const props = defineProps<Props>();
     }
   }
 
-  .description {
+  .description,
+  .configurable {
     display: flex;
     flex-direction: column;
     max-width: 224px;
 
     @media (max-width: 425px) {
       align-items: center;
+    }
+  }
+  .configurable {
+    margin-top: 5px;
+    .conf {
+      color: #000;
+    }
+    .conf:last-child {
+      margin-top: 5px;
     }
   }
   &__title {

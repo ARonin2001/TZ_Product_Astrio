@@ -1,7 +1,8 @@
 import brandsJson from '@/dbJSON/brands.json';
-import productsJson from '@/dbJSON/products.json';
+// import productsJson from '@/dbJSON/products.json';
+import productsJson from '@/dbJSON/products_configuratable.json';
 import { type IBrand } from '@/models/IBrand';
-import type { IProduct } from '@/models/IProduct';
+import type { IProduct, IProductConfigurable } from '@/models/IProduct';
 
 export const brandsApi = {
   getBrands: async () => {
@@ -17,12 +18,16 @@ export const brandsApi = {
 
 export const productsApi = {
   getProducts: async () => {
-    const data: IProduct[] = await JSON.parse(JSON.stringify(productsJson));
+    const data: IProduct[] | IProductConfigurable[] = await JSON.parse(
+      JSON.stringify(productsJson)
+    );
 
     return data;
   },
   getProductsByBrand: async (brandId: number) => {
-    const data: IProduct[] = await JSON.parse(JSON.stringify(productsJson));
+    const data: IProduct[] | IProductConfigurable[] = await JSON.parse(
+      JSON.stringify(productsJson)
+    );
 
     return data.filter((p) => p.brand === brandId);
   }

@@ -1,12 +1,17 @@
 import { defineStore } from 'pinia';
-import { type IProduct } from '@/models/IProduct';
+import {
+  type IConfigurableOptions,
+  type IProduct,
+  type IProductConfigurable,
+  type IVariant
+} from '@/models/IProduct';
 import { type IBrand } from '@/models/IBrand';
 import { productsApi, brandsApi } from '@/api/api';
 
 const localHost = window.location.origin + '/src/assets';
 
 interface initialState {
-  products: IProduct[];
+  products: (IProduct | IProductConfigurable)[];
 }
 
 export const useProductsStore = defineStore('products', {
@@ -17,7 +22,8 @@ export const useProductsStore = defineStore('products', {
   },
   actions: {
     async setAllProducts() {
-      const allProducts: IProduct[] = await productsApi.getProducts();
+      const allProducts: IProduct[] | IProductConfigurable[] =
+        await productsApi.getProducts();
 
       this.products = await getChangedProducts(allProducts);
     },
@@ -32,12 +38,59 @@ export const useProductsStore = defineStore('products', {
     getProductById: (state) => {
       return (productId: number) =>
         state.products.find((p) => p.id === productId);
+    },
+    getImg: (state) => {
+      return (productId: number, value_index: number) => {
+        const product = state.products.find((p) => p.id === productId);
+        let img: string | undefined = undefined;
+
+        if (!product || !('variants' in product)) return;
+
+        product.variants.forEach((item) => {
+          const findedValueIndex = item.attributes.find(
+            (att) => att.value_index === value_index
+          );
+
+          if (findedValueIndex) {
+            img = item.product.image;
+            return;
+          }
+        });
+
+        if (img) return localHost + img;
+      };
+    },
+    getAccessibleConfigs: (state) => {
+      return (productId: number, value_index: number, code: string) => {
+        const product = state.products.find((p) => p.id === productId);
+        let attributeValueIndexes: number[] = [];
+
+        if (!product || !('variants' in product)) return;
+
+        product.variants.forEach((item) => {
+          let attColor: { code: string; value_index: number } | undefined;
+          const findedValueIndex = item.attributes.find(
+            (att) => att.value_index === value_index
+          );
+
+          if (findedValueIndex) {
+            attColor = item.attributes.find((att) => att.code !== code);
+          }
+
+          if (attColor) attributeValueIndexes.push(attColor.value_index);
+        });
+
+        const attribute_code = code === 'color' ? 'size' : 'color';
+
+        return { code: attribute_code, attributeValueIndexes };
+      };
     }
   }
 });
 
 const getChangedProducts = async (porducts: IProduct[]) => {
-  const allBrands: IBrand[] = await brandsApi.getBrands();
+  const allBrands: IBrand[] | IProductConfigurable[] =
+    await brandsApi.getBrands();
 
   const result = porducts.map((prod) => {
     return {
@@ -51,7 +104,7 @@ const getChangedProducts = async (porducts: IProduct[]) => {
 };
 
 const getChangedProductsByBrand = async (
-  porducts: IProduct[],
+  porducts: IProduct[] | IProductConfigurable[],
   brandId: number
 ) => {
   const brand: IBrand = await brandsApi.getBrandById(brandId);

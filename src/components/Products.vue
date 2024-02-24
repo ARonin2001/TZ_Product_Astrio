@@ -5,11 +5,7 @@
         v-for="p in productsStore.products"
         :id="p.id"
         :key="p.id"
-        :title="p.title"
-        :brand="p.brand.toString()"
-        :imagePath="p.image"
-        :price="p.regular_price.value"
-        :currency="Currency[p.regular_price.currency]"
+        :product="p"
         @handleClick="addProduct"
       />
     </div>
@@ -21,15 +17,14 @@ import { onMounted, watch } from 'vue';
 import Product from './Product.vue';
 import { useProductsStore } from '@/store/productsStore';
 import { useRoute } from 'vue-router';
-import { Currency } from '@/types/Currency';
 import { useCartStore } from '@/store/cartStore';
 
 const productsStore = useProductsStore();
 const cartProduct = useCartStore();
 const route = useRoute();
 
-const addProduct = (productId: number) => {
-  cartProduct.addNewProduct(productId);
+const addProduct = (productId: number, colorId?: number, sizeId?: number) => {
+  cartProduct.addNewProduct(productId, colorId, sizeId);
 };
 
 watch(

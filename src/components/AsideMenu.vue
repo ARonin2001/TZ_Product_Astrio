@@ -1,5 +1,5 @@
 <template>
-  <aside class="aside" id="aside-menu-left">
+  <aside ref="root" class="aside" id="aside-menu-left">
     <div class="container">
       <span class="title">All brands</span>
       <hr />
@@ -27,11 +27,20 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, ref } from 'vue';
+import { onMounted, ref, watch } from 'vue';
 import AsideMenuItem from './AsideMenuItem.vue';
 import { useBrandsStore } from '@/store/brandStore';
 
 const brandsStore = useBrandsStore();
+
+// const root = ref<HTMLElement | null>(null);
+
+// watch(
+//   () => root.value?.className,
+//   () => {
+//     console.log(root.value?.className);
+//   }
+// );
 
 onMounted(() => {
   brandsStore.setAllBrands();
@@ -53,7 +62,7 @@ const handleClickItem = (itemId: number) => {
   height: 100%;
   z-index: 100;
 
-  @media (min-width: 320px) and (max-width: 768px) {
+  @media (max-width: 768px) {
     position: absolute;
     top: 40px;
     left: -200%;

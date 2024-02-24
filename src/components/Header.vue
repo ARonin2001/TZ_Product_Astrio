@@ -49,7 +49,6 @@ const route = useRoute();
 
 const cartStore = useCartStore();
 const { getCountProductsInCart } = storeToRefs(cartStore);
-// const getCountProductsInCart = cartStore.getCountProductsInCart;
 
 const toggleDisplayAside = () => {
   const aside = document.getElementById('aside-menu-left');
@@ -97,7 +96,7 @@ watch(
   .burger-menu {
     display: none;
 
-    @media (min-width: 320px) and (max-width: 768px) {
+    @media (max-width: 768px) {
       display: block;
     }
 

@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia';
-import { type IProduct } from '@/models/IProduct';
+import { type IProduct, type IProductConfigurable } from '@/models/IProduct';
 import { v4 as uuidv4 } from 'uuid';
 import { useProductsStore } from './productsStore';
 
@@ -7,6 +7,8 @@ interface initialState {
   cart: {
     id: string;
     product: IProduct;
+    color?: string;
+    size?: string;
     count: number;
     totalPrice: number;
   }[];
@@ -26,21 +28,31 @@ export const useCartStore = defineStore('cart', {
         return Math.round((prev + item.totalPrice) * 100) / 100;
       }, 0);
     },
-    addNewProduct(productId: number) {
+    addNewProduct(productId: number, colorId?: number, sizeId?: number) {
       const productById = useProductsStore().getProductById(productId);
-      const findedProduct = this.cart.find((c) => c.product.id === productId);
+      const sameProduct = this.cart.find((c) => c.product.id === productId);
 
-      if (productById && !findedProduct) {
-        const newProduct = {
-          id: uuidv4(),
-          product: productById,
-          count: 1,
-          totalPrice: productById.regular_price.value
-        };
-        this.cart.push(newProduct);
+      let color: string = '',
+        size: string = '';
 
-        this.updateSubTotalPrice();
+      if (!productById || sameProduct) return;
+
+      if ('configurable_options' in productById) {
+        color = this.getValueLabelByValueIndex(colorId!, productById) || '';
+        size = this.getValueLabelByValueIndex(sizeId!, productById) || '';
       }
+
+      const newProduct = {
+        id: uuidv4(),
+        product: productById,
+        count: 1,
+        totalPrice: productById.regular_price.value,
+        color,
+        size
+      };
+
+      this.cart.push(newProduct);
+      this.updateSubTotalPrice();
     },
     changeCountProduct(cartId: string, count: number) {
       this.cart.map((c) => {
@@ -64,6 +76,24 @@ export const useCartStore = defineStore('cart', {
     getProducts: (state) => {
       return state.cart.map((c) => c.product);
     },
-    getCountProductsInCart: (state) => state.cart.length
+    getCountProductsInCart: (state) => state.cart.length,
+    getValueLabelByValueIndex: (state) => {
+      return (value_index: number, product: IProductConfigurable) => {
+        let findedProp: string | undefined = undefined;
+
+        product.configurable_options.forEach((item) => {
+          const valueLabel = item.values.find(
+            (v) => v.value_index === value_index
+          )?.label;
+
+          if (valueLabel) {
+            findedProp = valueLabel;
+            return;
+          }
+        });
+
+        return findedProp;
+      };
+    }
   }
 });

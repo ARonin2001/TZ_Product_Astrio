@@ -2,7 +2,13 @@
   <div class="product-item">
     <div class="container">
       <!-- left: img, name product and brand -->
-      <CartProduct :title="title" :subTitle="subTitle" :img="img" />
+      <CartProduct
+        :title="title"
+        :subTitle="subTitle"
+        :img="img"
+        :color="color"
+        :size="size"
+      />
       <!-- right: price, count, totalCount -->
       <ProductInfo
         :id="id"
@@ -30,6 +36,8 @@ interface Props {
   currency: string;
   count: number;
   totalCount: number;
+  color?: string;
+  size?: string;
   handleChangePrice: (cartId: string, count: number) => void;
   deleteProduct: (cartId: string) => void;
 }
