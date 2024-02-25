@@ -3,7 +3,7 @@
     <div class="container">
       <div class="product_top">
         <div class="product__img">
-          <img :src="productImg" :alt="brand.toString()" />
+          <img :src="state.productImg" :alt="brand.toString()" />
         </div>
         <div class="product__name">
           <span class="title __title">{{ title }}</span>
@@ -11,11 +11,11 @@
         </div>
       </div>
 
-      <div class="product__config" v-if="configOptions">
+      <div class="product__config" v-if="'configurable_options' in product">
         <ProductConfig
-          :config="configOptions"
+          :config="product.configurable_options"
           :setConfigurableProduct="setConfigurableProduct"
-          :accessibleConfigs="accessibleConfigs"
+          :accessibleConfigs="state.accessConfigs"
         />
       </div>
 
@@ -28,7 +28,6 @@
             Currency[regular_price.currency]
           }}</span>
         </div>
-        <!-- <button class="btn__by">BY</button> -->
         <BaseButton
           @handleClick="onClick"
           title="By"
@@ -40,14 +39,10 @@
 </template>
 
 <script setup lang="ts">
-import type {
-  IConfigurableOptions,
-  IProduct,
-  IProductConfigurable
-} from '@/models/IProduct';
+import type { IProduct, IProductConfigurable } from '@/models/IProduct';
 import BaseButton from './BaseButton.vue';
 import ProductConfig from './ProductConfig.vue';
-import { onMounted, reactive, ref } from 'vue';
+import { onMounted, reactive } from 'vue';
 import { Currency } from '@/types/Currency';
 import { useProductsStore } from '@/store/productsStore';
 
@@ -55,13 +50,22 @@ interface Props {
   product: IProduct | IProductConfigurable;
 }
 
-const productImg = ref<string | undefined>('');
-const accessibleConfigs = ref<{
-  code: string;
-  attributeValueIndexes: number[];
-}>({ code: '', attributeValueIndexes: [] });
-const colorId = ref<number>();
-const sizeId = ref<number>();
+interface State {
+  productImg?: string;
+  colorId?: number;
+  sizeId?: number;
+  accessConfigs: {
+    code: string;
+    attributeValueIndexes: number[];
+  };
+}
+
+const state = reactive<State>({
+  productImg: '',
+  colorId: undefined,
+  sizeId: undefined,
+  accessConfigs: { code: '', attributeValueIndexes: [] }
+});
 
 const productStore = useProductsStore();
 
@@ -71,17 +75,12 @@ const { id, title, regular_price, brand } = reactive({
 });
 
 onMounted(() => {
-  productImg.value = props.product.image;
+  state.productImg = props.product.image;
 });
 
-const configOptions: IConfigurableOptions[] | undefined =
-  'configurable_options' in props.product
-    ? props.product?.configurable_options
-    : undefined;
-
 const setAccessibleConfigs = (value_index: number, code: string) => {
-  accessibleConfigs.value = productStore.getAccessibleConfigs(
-    props.product.id,
+  state.accessConfigs = productStore.getAccessibleConfigs(
+    id,
     value_index,
     code
   ) || { code: '', attributeValueIndexes: [] };
@@ -89,15 +88,15 @@ const setAccessibleConfigs = (value_index: number, code: string) => {
 const setConfigurableProduct = (value_index: number, code: string) => {
   setAccessibleConfigs(value_index, code);
 
-  if (code === 'color') colorId.value = value_index;
-  else sizeId.value = value_index;
+  if (code === 'color') state.colorId = value_index;
+  else state.sizeId = value_index;
 
-  productImg.value = productStore.getImg(props.product.id, value_index);
+  state.productImg = productStore.getImg(props.product.id, value_index);
 };
 
 const emits = defineEmits(['handleClick']);
 const onClick = () => {
-  emits('handleClick', id, colorId.value, sizeId.value);
+  emits('handleClick', id, state.colorId, state.sizeId);
 };
 </script>
 

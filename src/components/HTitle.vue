@@ -2,12 +2,6 @@
   <div class="h-title">
     <div class="h-title__container">
       <div class="h-title__title_main">
-        <!-- <unicon
-          name="shopping-cart"
-          class="title__icon"
-          height="18px"
-          width="18px"
-        /> -->
         <h1 class="title">{{ title }}</h1>
       </div>
       <span class="sub-title __sub-title">{{ subTitle }}</span>

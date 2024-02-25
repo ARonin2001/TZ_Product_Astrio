@@ -47,11 +47,11 @@ export const useProductsStore = defineStore('products', {
         if (!product || !('variants' in product)) return;
 
         product.variants.forEach((item) => {
-          const findedValueIndex = item.attributes.find(
+          const valueIndex = item.attributes.find(
             (att) => att.value_index === value_index
           );
 
-          if (findedValueIndex) {
+          if (valueIndex) {
             img = item.product.image;
             return;
           }
@@ -69,11 +69,11 @@ export const useProductsStore = defineStore('products', {
 
         product.variants.forEach((item) => {
           let attColor: { code: string; value_index: number } | undefined;
-          const findedValueIndex = item.attributes.find(
+          const sameValueIndex = item.attributes.find(
             (att) => att.value_index === value_index
           );
 
-          if (findedValueIndex) {
+          if (sameValueIndex) {
             attColor = item.attributes.find((att) => att.code !== code);
           }
 

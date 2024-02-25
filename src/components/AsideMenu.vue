@@ -1,7 +1,10 @@
 <template>
   <aside ref="root" class="aside" id="aside-menu-left">
     <div class="container">
-      <span class="title">All brands</span>
+      <RouterLink :to="{ name: 'products' }" @click="onClickAllBrands">
+        <span class="__title">All brands</span>
+      </RouterLink>
+
       <hr />
 
       <ul class="items">
@@ -30,17 +33,9 @@
 import { onMounted, ref, watch } from 'vue';
 import AsideMenuItem from './AsideMenuItem.vue';
 import { useBrandsStore } from '@/store/brandStore';
+import { useProductsStore } from '@/store/productsStore';
 
 const brandsStore = useBrandsStore();
-
-// const root = ref<HTMLElement | null>(null);
-
-// watch(
-//   () => root.value?.className,
-//   () => {
-//     console.log(root.value?.className);
-//   }
-// );
 
 onMounted(() => {
   brandsStore.setAllBrands();
@@ -50,6 +45,10 @@ const currentItemId = ref(1);
 
 const handleClickItem = (itemId: number) => {
   currentItemId.value = itemId;
+};
+
+const onClickAllBrands = () => {
+  useProductsStore().setAllProducts();
 };
 </script>
 
