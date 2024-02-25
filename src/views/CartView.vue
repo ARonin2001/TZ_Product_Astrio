@@ -22,7 +22,7 @@
                 :handleChangePrice="cartStore.changeCountProduct"
                 :deleteProduct="cartStore.deleteCartProduct"
                 :price="p.product.regular_price.value"
-                :currency="Currency[p.product.regular_price.currency]"
+                :currency="$"
                 :count="p.count"
                 :totalCount="p.totalPrice"
                 :color="p.color"

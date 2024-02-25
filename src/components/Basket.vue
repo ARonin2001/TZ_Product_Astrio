@@ -3,22 +3,24 @@
     <div class="basket__count-products">
       <span>{{ count }}</span>
     </div>
-    <unicon
-      name="shopping-basket"
-      class="basket__icon"
-      height="36px"
-      width="36px"
-    />
+    <ArchiveBoxIcon class="basket__icon" />
   </div>
 </template>
 
 <script setup lang="ts">
+import { ArchiveBoxIcon } from '@heroicons/vue/24/solid';
+
 const props = defineProps<{ count: number }>();
 </script>
 
 <style scoped lang="scss">
 .basket {
   position: relative;
+
+  &__icon {
+    height: 36px;
+    color: black;
+  }
   cursor: pointer;
 
   &__count-products {

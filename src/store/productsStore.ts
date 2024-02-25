@@ -1,14 +1,9 @@
 import { defineStore } from 'pinia';
-import {
-  type IConfigurableOptions,
-  type IProduct,
-  type IProductConfigurable,
-  type IVariant
-} from '@/models/IProduct';
+import { type IProduct, type IProductConfigurable } from '@/models/IProduct';
 import { type IBrand } from '@/models/IBrand';
 import { productsApi, brandsApi } from '@/api/api';
 
-const localHost = window.location.origin + '/src/assets';
+const localHost = window.location.origin + '/TZ_Product_Astrio' + '/src/assets';
 
 interface initialState {
   products: (IProduct | IProductConfigurable)[];

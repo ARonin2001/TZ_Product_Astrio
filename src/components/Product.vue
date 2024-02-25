@@ -24,9 +24,7 @@
       <div class="product__footer">
         <div class="price">
           {{ regular_price.value }}
-          <span class="price-currency">{{
-            Currency[regular_price.currency]
-          }}</span>
+          <span class="price-currency">$</span>
         </div>
         <BaseButton
           @handleClick="onClick"
